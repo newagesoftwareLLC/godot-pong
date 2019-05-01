@@ -1,0 +1,152 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/World.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Paddle1.gd" type="Script" id=2]
+[ext_resource path="res://Textures/paddle.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Paddle2.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Ball.gd" type="Script" id=5]
+[ext_resource path="res://Textures/ball.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/win_text.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Button.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.05887, 36.0341 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.1077, 3.94659 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Paddle1" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 977.769, 289.115 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle1"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Paddle1"]
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Paddle2" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 45.3941, 293.875 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle2"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Paddle2"]
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Ball" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 234.31, 274.699 )
+mode = 2
+gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+linear_velocity = Vector2( 365, -365 )
+linear_damp = 0.0
+angular_damp = 0.0
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Ball"]
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Walls" type="StaticBody2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( -0.999985, -41, 1022, -39, 1024, 1.00003, 1.00002, 3.05176e-005 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( -2.70065, 600.684, 1022.59, 600.684, 1021.16, 629.323, 3.02724, 625.027 )
+
+[node name="p2_goal" type="StaticBody2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="p2_goal"]
+polygon = PoolVector2Array( -0.263062, -41.2631, -84.9902, -37.6597, -74.4072, 622.765, 1.00006, 624.25, 2.06537, 600.951, -39.2799, 597.01, -41.038, 2.77635, -2.38773, 0.050209 )
+
+[node name="p1_goal" type="StaticBody2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="p1_goal"]
+position = Vector2( 0, 1.10803 )
+polygon = PoolVector2Array( 1024.36, -39.4177, 1117.54, -39.4177, 1107.86, 631.629, 1019.05, 626.179, 1020.85, 600.526, 1066.56, 600.526, 1063.04, 1.01826, 1023.02, -0.897461 )
+
+[node name="p1_score" type="Label" parent="."]
+margin_left = 778.117
+margin_top = 18.9839
+margin_right = 803.117
+margin_bottom = 33.9839
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( -3.5, 6 )
+text = "0"
+
+[node name="p1_label" type="Label" parent="."]
+margin_left = 697.437
+margin_top = 25.8219
+margin_right = 756.437
+margin_bottom = 39.8219
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 45.8998, 13.0916 )
+text = "Player 1:"
+
+[node name="p2_label" type="Label" parent="."]
+margin_left = 259.134
+margin_top = 22.4555
+margin_right = 318.134
+margin_bottom = 36.4555
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 45.8998, 13.0916 )
+text = "Player 2:"
+
+[node name="p2_score" type="Label" parent="."]
+margin_left = 339.336
+margin_top = 15.3357
+margin_right = 364.336
+margin_bottom = 30.3357
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( -3.5, 6 )
+text = "0"
+
+[node name="win_text" type="Label" parent="."]
+margin_left = 284.676
+margin_top = 241.702
+margin_right = 378.676
+margin_bottom = 255.702
+rect_scale = Vector2( 5, 5 )
+script = ExtResource( 7 )
+
+[node name="restart_game" type="Button" parent="."]
+pause_mode = 2
+margin_left = 464.167
+margin_top = 339.428
+margin_right = 572.167
+margin_bottom = 372.428
+text = "Restart"
+script = ExtResource( 8 )
